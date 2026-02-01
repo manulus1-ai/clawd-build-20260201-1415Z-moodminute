@@ -1,0 +1,20 @@
+<section class="card wrap">
+  <h2>Shared week arc</h2>
+  <p class="muted">This link contains only what was shared. Nothing else is loaded.</p>
+
+  <div class="bars" *ngIf="days().length; else bad">
+    <div class="bar" *ngFor="let d of days()" [title]="d.day">
+      <div class="bar-fill" [style.height.%]="d.score * 100"></div>
+      <div class="bar-emoji" aria-hidden="true">{{ d.emoji }}</div>
+      <div class="bar-day muted">{{ d.day }}</div>
+    </div>
+  </div>
+
+  <ng-template #bad>
+    <p class="muted">This share link looks invalid or expired.</p>
+  </ng-template>
+
+  <div class="actions">
+    <a class="btn primary" routerLink="/">Open MoodMinute</a>
+  </div>
+</section>

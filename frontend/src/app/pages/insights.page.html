@@ -1,0 +1,57 @@
+<section class="card wrap">
+  <h2>Weekly insights</h2>
+  <p class="muted">Gentle patterns, not diagnoses. Use what helps; ignore the rest.</p>
+
+  <div class="grid">
+    <div class="card mini">
+      <div class="mini-title">Average</div>
+      <div class="mini-num">{{ avgScore() ? (avgScore() | number:'1.1-1') : '—' }}</div>
+      <div class="mini-sub muted">out of 5</div>
+    </div>
+
+    <div class="card mini">
+      <div class="mini-title">Trend</div>
+      <div class="mini-num">{{ trend().label }}</div>
+      <div class="mini-sub muted">Δ {{ trend().delta }}</div>
+    </div>
+
+    <div class="card mini">
+      <div class="mini-title">Streak</div>
+      <div class="mini-num">{{ mood.streakDays() }}</div>
+      <div class="mini-sub muted">days</div>
+    </div>
+  </div>
+
+  <div class="card block" *ngIf="weekEntries().length; else empty">
+    <div class="block-title">Top tags</div>
+    <div class="tagline muted" *ngIf="!tops().length">Add a tag during check-in to see patterns.</div>
+
+    <div class="taggrid" *ngIf="tops().length">
+      <div class="tag" *ngFor="let t of tops()">
+        <div class="tag-name">{{ t.tag }}</div>
+        <div class="tag-count muted">{{ t.count }}×</div>
+      </div>
+    </div>
+
+    <div class="share">
+      <div>
+        <div class="block-title">Share your week arc (opt-in)</div>
+        <div class="muted">Creates a link containing only the last 7 days you’ve logged. No account required.</div>
+      </div>
+
+      <div class="share-actions">
+        <button class="btn" type="button" (click)="buildShareLink()">Generate link</button>
+        <button class="btn primary" type="button" (click)="copyShareLink()">Copy</button>
+      </div>
+    </div>
+
+    <div class="share-url" *ngIf="shareUrl()">
+      <div class="muted">Link:</div>
+      <code>{{ shareUrl() }}</code>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <p class="muted">No data yet. Check in a few times and come back.</p>
+  </ng-template>
+</section>

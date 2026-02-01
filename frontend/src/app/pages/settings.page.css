@@ -1,0 +1,55 @@
+.wrap { padding: 18px; }
+h2 { margin: 0; letter-spacing: -0.01em; }
+
+.controls { margin-top: 12px; display: grid; gap: 10px; }
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+  background: color-mix(in oklab, var(--surface) 92%, transparent);
+  cursor: pointer;
+  text-align: left;
+}
+
+.toggle-title { font-weight: 800; }
+
+.pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--stroke) 18%, transparent);
+  border: 1px solid color-mix(in oklab, var(--stroke) 45%, transparent);
+  font-weight: 800;
+  font-size: 13px;
+  min-width: 56px;
+  text-align: center;
+}
+
+.pill.on {
+  background: color-mix(in oklab, var(--accent2) 18%, transparent);
+  border-color: color-mix(in oklab, var(--accent2) 35%, transparent);
+}
+
+.block { margin-top: 12px; padding: 14px; box-shadow: none; }
+.block-title { font-weight: 800; }
+
+.data-actions { margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+.import { margin-top: 14px; display: grid; gap: 8px; }
+textarea {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+  background: var(--surface);
+  padding: 12px;
+  font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  color: var(--text);
+}
+
+.import-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.privacy { margin-top: 14px; }

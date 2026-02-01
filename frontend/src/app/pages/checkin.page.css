@@ -1,0 +1,44 @@
+.wrap { padding: 18px; }
+h2 { margin: 0; letter-spacing: -0.01em; }
+
+.emoji-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.emoji {
+  padding: 14px 10px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+  background: color-mix(in oklab, var(--surface2) 70%, transparent);
+  cursor: pointer;
+  font-size: 28px;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.emoji.active {
+  background: color-mix(in oklab, var(--accent) 16%, var(--surface));
+  border-color: color-mix(in oklab, var(--accent) 24%, var(--stroke));
+  transform: translateY(-1px);
+}
+
+.tags { margin-top: 14px; }
+.tags-title { font-weight: 750; margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.note { margin-top: 14px; display: block; }
+textarea {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid color-mix(in oklab, var(--stroke) 85%, transparent);
+  background: var(--surface);
+  padding: 12px;
+  font: inherit;
+  color: var(--text);
+}
+
+.actions { margin-top: 14px; display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+.privacy { margin-top: 12px; color: var(--muted); font-size: 13px; }

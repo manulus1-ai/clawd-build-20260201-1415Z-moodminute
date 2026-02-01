@@ -1,0 +1,61 @@
+<section class="card wrap">
+  <div class="head">
+    <div>
+      <h2>History</h2>
+      <p class="muted">Tap an entry to edit. Filter by tag.</p>
+    </div>
+
+    <label class="filter">
+      <span class="muted">Tag filter</span>
+      <input [ngModel]="tagQuery()" (ngModelChange)="tagQuery.set($event)" placeholder="e.g. sleep" />
+    </label>
+  </div>
+
+  <div class="list" *ngIf="filtered().length; else empty">
+    <div class="entry" *ngFor="let e of filtered()">
+      <button class="entry-top" type="button" (click)="select(e)">
+        <div class="emoji" aria-hidden="true">{{ e.emoji }}</div>
+        <div class="meta">
+          <div class="meta-title">
+            <span class="when">{{ fmtDay(e.ts) }}</span>
+            <span class="muted">· {{ fmtTime(e.ts) }}</span>
+          </div>
+          <div class="tags muted">{{ e.tags.length ? e.tags.join(' · ') : 'no tags' }}</div>
+        </div>
+        <div class="chev" aria-hidden="true">{{ selectedId() === e.id ? '▴' : '▾' }}</div>
+      </button>
+
+      <div class="editor" *ngIf="selectedId() === e.id">
+        <div class="editor-row">
+          <span class="muted">Emoji</span>
+          <div class="emoji-mini">
+            <button type="button" class="chip" (click)="update(e, { emoji: '😞' })">😞</button>
+            <button type="button" class="chip" (click)="update(e, { emoji: '😕' })">😕</button>
+            <button type="button" class="chip" (click)="update(e, { emoji: '😐' })">😐</button>
+            <button type="button" class="chip" (click)="update(e, { emoji: '🙂' })">🙂</button>
+            <button type="button" class="chip" (click)="update(e, { emoji: '😁' })">😁</button>
+          </div>
+        </div>
+
+        <label class="editor-row">
+          <span class="muted">Tags (comma separated)</span>
+          <input #tagsInput [value]="e.tags.join(', ')" (change)="update(e, { tagsText: tagsInput.value })" />
+        </label>
+
+        <label class="editor-row">
+          <span class="muted">Note</span>
+          <textarea #noteInput rows="2" [value]="e.note || ''" (change)="update(e, { note: noteInput.value })" placeholder="Optional…"></textarea>
+        </label>
+
+        <div class="editor-actions">
+          <button class="btn" type="button" (click)="remove(e)">Delete</button>
+          <button class="btn primary" type="button" (click)="selectedId.set(null)">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <p class="muted">No check-ins yet. Go to “Check-in” to add your first one.</p>
+  </ng-template>
+</section>

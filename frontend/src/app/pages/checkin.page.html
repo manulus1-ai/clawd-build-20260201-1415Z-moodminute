@@ -1,0 +1,44 @@
+<section class="card wrap">
+  <h2>Quick check-in</h2>
+  <p class="muted">Pick the emoji that fits. Add a tag if you want. Done.</p>
+
+  <div class="emoji-grid" role="radiogroup" aria-label="Mood">
+    <button
+      *ngFor="let e of emojis"
+      class="emoji"
+      [class.active]="selectedEmoji() === e"
+      (click)="selectedEmoji.set(e)"
+      type="button"
+      [attr.aria-checked]="selectedEmoji() === e"
+      role="radio"
+    >
+      <span aria-hidden="true">{{ e }}</span>
+    </button>
+  </div>
+
+  <div class="tags">
+    <div class="tags-title">Tags</div>
+    <div class="chips">
+      <button class="chip" *ngFor="let t of suggestedTags" type="button" (click)="toggleTag(t)" [class.active]="selectedTags().includes(t)">
+        {{ t }}
+      </button>
+    </div>
+  </div>
+
+  <label class="note">
+    <div class="tags-title">Optional note</div>
+    <textarea
+      [ngModel]="note()"
+      (ngModelChange)="note.set($event)"
+      placeholder="One sentence, if it helps..."
+      rows="3"
+    ></textarea>
+  </label>
+
+  <div class="actions">
+    <a class="btn" routerLink="/">Cancel</a>
+    <button class="btn primary" type="button" (click)="save()">Save</button>
+  </div>
+
+  <p class="privacy">Privacy note: your check-ins live in <strong>this browser</strong> only unless you export or share.</p>
+</section>

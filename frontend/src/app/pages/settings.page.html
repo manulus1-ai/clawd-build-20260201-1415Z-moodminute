@@ -1,0 +1,45 @@
+<section class="card wrap">
+  <h2>Settings</h2>
+  <p class="muted">Small controls that keep the app calm and readable.</p>
+
+  <div class="controls">
+    <button class="toggle" type="button" (click)="toggleReduceMotion()">
+      <div>
+        <div class="toggle-title">Reduce motion</div>
+        <div class="muted">Turns off subtle animations.</div>
+      </div>
+      <div class="pill" [class.on]="settings().reduceMotion">{{ settings().reduceMotion ? 'On' : 'Off' }}</div>
+    </button>
+
+    <button class="toggle" type="button" (click)="toggleHighContrast()">
+      <div>
+        <div class="toggle-title">High contrast</div>
+        <div class="muted">Accessible dark theme with stronger contrast.</div>
+      </div>
+      <div class="pill" [class.on]="settings().highContrast">{{ settings().highContrast ? 'On' : 'Off' }}</div>
+    </button>
+  </div>
+
+  <div class="card block">
+    <div class="block-title">Data</div>
+    <p class="muted">Entries stored locally: <strong>{{ entryCount() }}</strong></p>
+
+    <div class="data-actions">
+      <button class="btn primary" type="button" (click)="downloadExport()">Export JSON</button>
+    </div>
+
+    <div class="import">
+      <div class="muted">Import JSON (paste a MoodMinute export):</div>
+      <textarea [ngModel]="importText()" (ngModelChange)="importText.set($event)" rows="6" placeholder="Paste a MoodMinute export JSON here..."></textarea>
+      <div class="import-actions">
+        <button class="btn" type="button" (click)="runImport()">Import</button>
+        <div class="muted" *ngIf="importResult()">{{ importResult() }}</div>
+      </div>
+    </div>
+
+    <div class="privacy">
+      <div class="block-title">Privacy</div>
+      <p class="muted">MoodMinute doesn’t send your entries anywhere. Sharing is opt-in and produces a link that contains the data you shared.</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,72 @@
+<section class="hero card">
+  <div class="hero-top">
+    <div>
+      <h1>10 seconds a day.</h1>
+      <p class="muted">Local-first mood check-ins — no journaling required.</p>
+    </div>
+
+    <div class="streak">
+      <div class="streak-num">{{ streak() }}</div>
+      <div class="streak-label">day streak</div>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <a class="btn primary" routerLink="/check-in">{{ today() ? 'Check-in again' : 'Check-in' }}</a>
+    <a class="btn" routerLink="/history">View history</a>
+  </div>
+
+  <div class="today" *ngIf="today() as t">
+    <div class="today-emoji" aria-hidden="true">{{ t.emoji }}</div>
+    <div>
+      <div class="today-title">Today’s check-in saved</div>
+      <div class="muted">Tags: {{ t.tags.length ? t.tags.join(' · ') : 'none' }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card panel">
+    <div class="panel-title">This week</div>
+    <div class="panel-kpi">
+      <div class="kpi">
+        <div class="kpi-num">{{ checkinsThisWeek() }}</div>
+        <div class="kpi-label">check-ins</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-num">7</div>
+        <div class="kpi-label">days</div>
+      </div>
+    </div>
+
+    <div class="bars" *ngIf="weekBars().length; else emptyWeek">
+      <div class="bar" *ngFor="let b of weekBars()" [title]="b.label">
+        <div class="bar-fill" [style.height.%]="b.score * 100"></div>
+        <div class="bar-emoji" aria-hidden="true">{{ b.emoji }}</div>
+      </div>
+    </div>
+
+    <ng-template #emptyWeek>
+      <p class="muted">No data yet. Your arc shows up after your first check-in.</p>
+    </ng-template>
+
+    <div class="panel-actions">
+      <a routerLink="/insights" class="quiet">See insights →</a>
+    </div>
+  </div>
+
+  <div class="card panel">
+    <div class="panel-title">Privacy (by default)</div>
+    <p class="muted">Everything stays in your browser unless you export or share a week arc.</p>
+
+    <ul class="bullets">
+      <li>No account</li>
+      <li>No analytics</li>
+      <li>Export/import anytime</li>
+    </ul>
+
+    <div class="panel-actions">
+      <a routerLink="/settings" class="quiet">Controls & export →</a>
+    </div>
+  </div>
+</section>
